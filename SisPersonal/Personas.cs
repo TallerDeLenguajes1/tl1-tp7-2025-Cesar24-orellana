@@ -5,7 +5,7 @@ namespace Personal
         private string? nombre;
         private string? apellido;
         private DateTime fnaciomiento;
-        private char? estadocivil;
+        private char? estadocivil;  // C = Casado, S = Soltero
         private DateTime fingreso;
         private double sueldo;
         private Cargos cargo;
@@ -19,7 +19,7 @@ namespace Personal
             get => apellido;
             set => apellido = value;
         }
-        public DateTime Fnaciomiento
+        public DateTime Fnacimiento
         {
             get => fnaciomiento;
             set => fnaciomiento = value;
@@ -46,11 +46,11 @@ namespace Personal
             set => cargo = value;
         }
         // Constructor Con los datos de Empleado
-        public Empleado(string nombre , string apellido, DateTime fnacimiento, char estadocivil, DateTime fingreso, double sueldo, Cargos cargo)
+        public Empleado(string nombre, string apellido, DateTime fnacimiento, char estadocivil, DateTime fingreso, double sueldo, Cargos cargo)
         {
             this.Nombre = nombre;
             this.Apellido = apellido;
-            this.Fnaciomiento = fnaciomiento;
+            this.Fnacimiento = fnaciomiento;
             this.Estadocivil = estadocivil;
             this.Fingreso = fingreso;
             this.Sueldo = sueldo;
@@ -63,6 +63,56 @@ namespace Personal
             Ingeniero,
             Especialista,
             Investigador
+        }
+        public int Antiguedad
+        {
+            get
+            {
+                int antiguedad = DateTime.Now.Year - Fingreso.Year;
+                if (DateTime.Now < Fingreso.AddYears(antiguedad)) antiguedad--;
+                return antiguedad;
+            }
+        }
+        public int Edad
+        {
+            get
+            {
+                int edad = DateTime.Now.Year - Fnacimiento.Year;
+                if (DateTime.Now < Fnacimiento.AddYears(edad)) edad--;
+                return edad;
+            }
+        }
+        public int AniosJubilarse => Math.Max(0, 65 - Edad);
+
+        public double Salario
+        {
+            get
+            {
+                double adicional = 0;
+                if (Antiguedad <= 20) // Cargo por Antiguedad
+                {
+                    adicional += Sueldo * (Antiguedad * 0.01);
+                }
+                else
+                {
+                    adicional += Sueldo * 0.25;
+                }
+                if (cargo == Cargos.Especialista || cargo == Cargos.Ingeniero) // Cargo por Puesto de Trabajo
+                {
+                    adicional += adicional * 1.5;
+                }
+                if (Estadocivil == 'C')     // Cargo por Estado Civil
+                {
+                    adicional *= 150000;
+                }
+                return Sueldo + adicional;
+            }
+        }
+        public void MostrarDetalles()
+        {
+            Console.WriteLine($"Nombre: {Nombre}");
+            Console.WriteLine($"Apellido: {Apellido}");
+            Console.WriteLine($"Fecha de Nacimiento: {Fnacimiento.ToShortDateString()} (Edad: {Edad} Años)");
         }
     }
 
