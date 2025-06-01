@@ -4,7 +4,7 @@ namespace Personal
     {
         private string? nombre;
         private string? apellido;
-        private DateTime fnaciomiento;
+        private DateTime fnacimiento;
         private char? estadocivil;  // C = Casado, S = Soltero
         private DateTime fingreso;
         private double sueldo;
@@ -21,8 +21,8 @@ namespace Personal
         }
         public DateTime Fnacimiento
         {
-            get => fnaciomiento;
-            set => fnaciomiento = value;
+            get => fnacimiento;
+            set => fnacimiento = value;
         }
         public DateTime Fingreso
         {
@@ -50,7 +50,7 @@ namespace Personal
         {
             this.Nombre = nombre;
             this.Apellido = apellido;
-            this.Fnacimiento = fnaciomiento;
+            this.Fnacimiento = fnacimiento;
             this.Estadocivil = estadocivil;
             this.Fingreso = fingreso;
             this.Sueldo = sueldo;
@@ -105,7 +105,9 @@ namespace Personal
                 {
                     adicional *= 150000;
                 }
-                return Sueldo + adicional;
+                double salario = Sueldo;
+                salario += adicional;
+                return salario;
             }
         }
         public void MostrarDetalles() // Mostrar Datos

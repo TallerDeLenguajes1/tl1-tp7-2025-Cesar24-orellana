@@ -16,7 +16,7 @@ foreach (var empl in empleados)
 
     if (empl.AniosJubilarse < ProximoJubilarse.AniosJubilarse) ProximoJubilarse = empl;
 }
-Console.WriteLine($"\nTotal en Salarios: %{SalarioTotal}");
+Console.WriteLine($"\nTotal en Salarios: ${SalarioTotal}");
 Console.WriteLine("Empleado mas proximo a jubilarse");
 ProximoJubilarse.MostrarDetalles();
 
