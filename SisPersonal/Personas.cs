@@ -53,11 +53,12 @@ namespace Personal
             this.Fnaciomiento = fnaciomiento;
             this.Estadocivil = estadocivil;
             this.Fingreso = fingreso;
-            this.sueldo = sueldo;
-            this.cargo = cargo;
+            this.Sueldo = sueldo;
+            this.Cargo = cargo;
         }
         public enum Cargos
         {
+            Auxiliar,
             Administrativo,
             Ingeniero,
             Especialista,
