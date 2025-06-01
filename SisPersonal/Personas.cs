@@ -1,6 +1,6 @@
 namespace Personal
 {
-    public class Empleado
+    public class Empleado  // Creacion de Clase
     {
         private string? nombre;
         private string? apellido;
@@ -108,11 +108,18 @@ namespace Personal
                 return Sueldo + adicional;
             }
         }
-        public void MostrarDetalles()
+        public void MostrarDetalles() // Mostrar Datos
         {
             Console.WriteLine($"Nombre: {Nombre}");
             Console.WriteLine($"Apellido: {Apellido}");
             Console.WriteLine($"Fecha de Nacimiento: {Fnacimiento.ToShortDateString()} (Edad: {Edad} Años)");
+            Console.WriteLine($"Estado Civil: {Estadocivil}");
+            Console.WriteLine($"Fecha de Ingreso: {Fingreso.ToShortDateString()} (Antiguedad: {Antiguedad} Años)");
+            Console.WriteLine($"Cargo: {cargo}");
+            Console.WriteLine($"Sueldo Basico: ${Sueldo}");
+            Console.WriteLine($"Años Para Jubilarse: {AniosJubilarse} años");
+            Console.WriteLine($"Sueldo Total: ${Salario}");
+            Console.WriteLine(new string('-', 40));
         }
     }
 
