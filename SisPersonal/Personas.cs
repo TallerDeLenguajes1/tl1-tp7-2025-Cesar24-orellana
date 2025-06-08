@@ -64,7 +64,7 @@ namespace Personal
             Especialista,
             Investigador
         }
-        public int Antiguedad
+        /* public int Antiguedad
         {
             get
             {
@@ -72,8 +72,8 @@ namespace Personal
                 if (DateTime.Now < Fingreso.AddYears(antiguedad)) antiguedad--;
                 return antiguedad;
             }
-        }
-        public int Edad
+        } */
+        /* public int Edad
         {
             get
             {
@@ -81,17 +81,20 @@ namespace Personal
                 if (DateTime.Now < Fnacimiento.AddYears(edad)) edad--;
                 return edad;
             }
-        }
-        public int AniosJubilarse => Math.Max(0, 65 - Edad);
+        } */
+        public int AniosJubilarse => Math.Max(0, 65 - (DateTime.Now.Year - Fingreso.Year));
 
         public double Salario
         {
             get
             {
+                int antiguedad = DateTime.Now.Year - Fingreso.Year;
+            if(DateTime.Now<Fingreso.AddYears(antiguedad)) antiguedad --;
+
                 double adicional = 0;
-                if (Antiguedad <= 20) // Cargo por Antiguedad
+                if (antiguedad <= 20) // Cargo por Antiguedad
                 {
-                    adicional += Sueldo * (Antiguedad * 0.01);
+                    adicional += Sueldo * (antiguedad * 0.01);
                 }
                 else
                 {
@@ -105,18 +108,23 @@ namespace Personal
                 {
                     adicional *= 150000;
                 }
-                double salario = Sueldo;
-                salario += adicional;
-                return salario;
+                return Sueldo + adicional;
             }
         }
         public void MostrarDetalles() // Mostrar Datos
         {
+            // Calcular Antiguedad
+            int antiguedad = DateTime.Now.Year - Fingreso.Year;
+            if(DateTime.Now<Fingreso.AddYears(antiguedad)) antiguedad --;
+            // Calcular Edad
+            int edad = DateTime.Now.Year - Fnacimiento.Year;
+            if(DateTime.Now<Fingreso.AddYears(edad)) edad --;
+
             Console.WriteLine($"Nombre: {Nombre}");
             Console.WriteLine($"Apellido: {Apellido}");
-            Console.WriteLine($"Fecha de Nacimiento: {Fnacimiento.ToShortDateString()} (Edad: {Edad} Años)");
+            Console.WriteLine($"Fecha de Nacimiento: {Fnacimiento.ToShortDateString()} (Edad: {edad} Años)");
             Console.WriteLine($"Estado Civil: {Estadocivil}");
-            Console.WriteLine($"Fecha de Ingreso: {Fingreso.ToShortDateString()} (Antiguedad: {Antiguedad} Años)");
+            Console.WriteLine($"Fecha de Ingreso: {Fingreso.ToShortDateString()} (Antiguedad: {antiguedad} Años)");
             Console.WriteLine($"Cargo: {cargo}");
             Console.WriteLine($"Sueldo Basico: ${Sueldo}");
             Console.WriteLine($"Años Para Jubilarse: {AniosJubilarse} años");
